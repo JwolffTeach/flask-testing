@@ -1,0 +1,18 @@
+<html>
+<head>
+    {% if title %}
+    <title>{{ title}} - Microblog</title>
+    {% else %}
+    <title> Welcome to Microblog</title>
+    {% endif %}
+</head>
+<body>
+    <div>Microblog: <a href="/index">Home</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+    <hr>
+</body>
+<footer>
+    <small>&copy; Copyright 2018, Jeremy Wolff</small>
+</footer>
+</html>
