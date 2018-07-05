@@ -106,3 +106,4 @@ AttributeError: type object 'User' has no attribute 'verify_reset_password_token
 2018-07-05 11:22:54,846 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:44
 2018-07-05 11:25:29,976 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:44
 2018-07-05 11:38:02,870 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:44
+2018-07-05 12:08:26,950 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
