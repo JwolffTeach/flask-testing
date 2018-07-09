@@ -60,3 +60,13 @@ class ValveForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=140)])
     gpio_pin = TextAreaField('GPIO Pin', validators=[DataRequired(), Length(min=1, max=2)])
     submit = SubmitField('Add New Valve')
+
+class EditValveForm(FlaskForm):
+    valve = TextAreaField('Valve Number', validators=[DataRequired(), Length(min=1, max=2)])
+    description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=140)])
+    gpio_pin = TextAreaField('GPIO Pin', validators=[DataRequired(), Length(min=1, max=2)])
+    submit = SubmitField('Add New Valve')
+
+    def __init__(self, original_valve, *args, **kwargs):
+        super(EditValveForm, self).__init__(*args, **kwargs)
+        self.original_valve = original_valve

@@ -10,9 +10,22 @@
         </div>
     </div>
     {% endif %}
-    {% for valve in valves %}
-        {% include '_valve.html' %}
-    {% endfor %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Num</th>
+                <th>Description</th>
+                <th>GPIO Pin</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for valve in valves %}
+            {% include '_valve.html' %}
+        {% endfor %}
+        </tbody>
+    </table>
     <nav aria-label="...">
             <ul class="pager">
                 <li class="previous{% if not prev_url %} disabled{% endif %}">

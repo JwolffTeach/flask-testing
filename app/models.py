@@ -91,4 +91,4 @@ class Valve(db.Model):
     gpio_pin = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<Valve {}{}{}{}>'.format(self.id, self.valve, self.description, self.gpio_pin)
+        return '{}'.format(self.valve)
