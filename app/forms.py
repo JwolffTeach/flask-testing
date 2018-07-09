@@ -54,3 +54,9 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Request Password Reset')
+
+class ValveForm(FlaskForm):
+    valve = TextAreaField('Valve Number', validators=[DataRequired(), Length(min=1, max=2)])
+    description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=140)])
+    gpio_pin = TextAreaField('GPIO Pin', validators=[DataRequired(), Length(min=1, max=2)])
+    submit = SubmitField('Add New Valve')

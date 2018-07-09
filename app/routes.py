@@ -4,8 +4,8 @@ from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, \
-    ResetPasswordRequestForm, ResetPasswordForm
-from app.models import User, Post
+    ResetPasswordRequestForm, ResetPasswordForm, ValveForm
+from app.models import User, Post, Valve
 from app.email import send_password_reset_email
 
 
@@ -185,3 +185,29 @@ def unfollow(username):
     db.session.commit()
     flash('You are not following {}.'.format(username))
     return redirect(url_for('user', username=username))
+
+@app.route('/valves', methods=['GET', 'POST'])
+@login_required
+def valves():
+    form = ValveForm()
+    if form.validate_on_submit():
+        valve = Valve(valve=form.valve.data, description=form.description.data, gpio_pin=form.gpio_pin.data)
+        db.session.add(valve)
+        db.session.commit()
+        flash('Your valve has been added!')
+        return redirect(url_for('valves'))
+    """
+    valves = Valve.query.all()
+    return render_template('valves.html', title='Sprinkler Valves', form=form,
+                        valves=valves.items)
+    """
+    page = request.args.get('page', 1, type=int)
+    valves = Valve.query.order_by(Valve.id).paginate(
+        page, app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('valves', page=valves.next_num) \
+        if valves.has_next else None
+    prev_url = url_for('valves', page=valves.prev_num) \
+        if valves.has_prev else None
+    return render_template('valves.html', title='Sprinkler Valves', form=form,
+                           valves=valves.items, next_url=next_url,
+                           prev_url=prev_url)

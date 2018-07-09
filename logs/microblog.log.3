@@ -1,4 +1,4 @@
-2018-07-05 10:48:07,461 ERROR: Exception on /reset_password_request [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
+2018-07-09 12:50:13,723 ERROR: Exception on /valves [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
 Traceback (most recent call last):
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,8 +12,10 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/seth/myproject/app/routes.py", line 154, in reset_password_request
-    return render_template('reset_password_request.html', title='Reset Password', form=form)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/seth/myproject/app/routes.py", line 213, in valves
+    prev_url=prev_url)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
     return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 869, in get_or_select_template
@@ -30,8 +32,8 @@ Traceback (most recent call last):
     reraise(exc_type, exc_value, tb)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
     raise value.with_traceback(tb)
-  File "/home/seth/myproject/app/templates/reset_password_request.html", line 11, in template
-    <span style="color: red;">[{{ error }]]</span>
+  File "/home/seth/myproject/app/templates/valves.html", line 13, in template
+    {% if Valves.count > 0}
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 497, in _parse
     return Parser(self, source, name, encode_filename(filename)).parse()
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 901, in parse
@@ -48,26 +50,22 @@ Traceback (most recent call last):
     rv = self.parse_statement()
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
     return getattr(self, 'parse_' + self.stream.current.value)()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 199, in parse_for
-    body = self.parse_statements(('name:endfor', 'name:else'))
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 165, in parse_statements
-    result = self.subparse(end_tokens)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 875, in subparse
-    add_data(self.parse_tuple(with_condexpr=True))
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 211, in parse_if
+    node.test = self.parse_tuple(with_condexpr=False)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 620, in parse_tuple
     args.append(parse())
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 432, in parse_expression
-    return self.parse_condexpr()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 437, in parse_condexpr
-    expr1 = self.parse_or()
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 612, in <lambda>
+    parse = lambda: self.parse_expression(with_condexpr=False)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 433, in parse_expression
+    return self.parse_or()
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 450, in parse_or
     left = self.parse_and()
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 459, in parse_and
     left = self.parse_not()
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 470, in parse_not
     return self.parse_compare()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 474, in parse_compare
-    expr = self.parse_math1()
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 480, in parse_compare
+    ops.append(nodes.Operand(token_type, self.parse_math1()))
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 496, in parse_math1
     left = self.parse_concat()
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 507, in parse_concat
@@ -78,7 +76,7 @@ Traceback (most recent call last):
     left = self.parse_unary()
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 546, in parse_unary
     node = self.parse_primary()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 562, in parse_primary
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 572, in parse_primary
     next(self.stream)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/lexer.py", line 359, in __next__
     self.current = next(self._iter)
@@ -87,8 +85,8 @@ Traceback (most recent call last):
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/lexer.py", line 683, in tokeniter
     filename)
 jinja2.exceptions.TemplateSyntaxError: unexpected '}'
-2018-07-05 10:53:27,289 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:44
-2018-07-05 10:53:45,121 ERROR: Exception on /reset_password_request [POST] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
+2018-07-09 12:50:48,439 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:50:50,336 ERROR: Exception on /valves [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
 Traceback (most recent call last):
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -102,29 +100,39 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/seth/myproject/app/routes.py", line 151, in reset_password_request
-    send_password_reset_email(user)
-  File "/home/seth/myproject/app/email.py", line 12, in send_password_reset_email
-    sender=app.config['ADMINS'][0],
-NameError: name 'app' is not defined
-2018-07-05 10:55:57,972 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:44
-2018-07-05 10:56:07,394 ERROR: Exception on /reset_password_request [POST] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
-Traceback (most recent call last):
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/seth/myproject/app/routes.py", line 213, in valves
+    prev_url=prev_url)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
+    context, ctx.app)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
+    rv = template.render(context)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
     reraise(exc_type, exc_value, tb)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/seth/myproject/app/routes.py", line 151, in reset_password_request
-    send_password_reset_email(user)
-  File "/home/seth/myproject/app/email.py", line 16, in send_password_reset_email
-    text_body=render_template('email/reset_password.txt', user=user, token=token),
-NameError: name 'token' is not defined
-2018-07-05 10:57:23,962 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:44
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/home/seth/myproject/app/templates/valves.html", line 2, in top-level template code
+    {% import 'bootstrap/wtf.html' as wtf %}
+  File "/home/seth/myproject/app/templates/base.html", line 1, in top-level template code
+    {% extends 'bootstrap/base.html' %}
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
+    {%- block html %}
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
+    {% block body -%}
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block "body"
+    {% block content -%}
+  File "/home/seth/myproject/app/templates/base.html", line 48, in block "content"
+    {% block app_content %}{% endblock %}
+  File "/home/seth/myproject/app/templates/valves.html", line 13, in block "app_content"
+    {% if Valves.count > 0 %}
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'Valves' is undefined
+2018-07-09 12:51:10,332 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46

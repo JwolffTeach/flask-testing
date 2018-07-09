@@ -15,3 +15,4 @@ class Config(object):
     ADMINS = ['jwolff@dsdmail.net']
 
     POSTS_PER_PAGE = 3
+    VALVES_PER_PAGE = 8

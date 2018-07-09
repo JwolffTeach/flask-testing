@@ -1,4 +1,11 @@
-2018-07-02 15:22:01,155 ERROR: Exception on /index [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
+2018-07-09 12:22:43,779 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:30:22,405 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:30:27,477 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:32:21,075 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:34:29,584 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:37:55,334 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:38:38,039 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:38:39,443 ERROR: Exception on /valves [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
 Traceback (most recent call last):
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,56 +21,11 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/home/seth/myproject/app/routes.py", line 22, in index
-    return render_template("index.html", title='Home Page', form=form, posts=posts)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
-    context, ctx.app)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
-    rv = template.render(context)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/home/seth/myproject/app/templates/base.html", line 18, in template
-    <a href="{{ url for('explore') }}">Explore</a>
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1005, in render
-    return concat(self.root_render_func(self.new_context(vars)))
-  File "/home/seth/myproject/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/home/seth/myproject/app/templates/base.html", line 18, in template
-    <a href="{{ url for('explore') }}">Explore</a>
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 497, in _parse
-    return Parser(self, source, name, encode_filename(filename)).parse()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 901, in parse
-    result = nodes.Template(self.subparse(), lineno=1)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
-    rv = self.parse_statement()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
-    return getattr(self, 'parse_' + self.stream.current.value)()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 223, in parse_if
-    drop_needle=True)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 165, in parse_statements
-    result = self.subparse(end_tokens)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 876, in subparse
-    self.stream.expect('variable_end')
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/lexer.py", line 384, in expect
-    self.name, self.filename)
-jinja2.exceptions.TemplateSyntaxError: expected token 'end of print statement', got 'for'
-2018-07-02 15:22:54,712 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:42
-2018-07-02 15:23:37,636 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:42
-2018-07-02 15:24:00,289 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:42
-2018-07-02 15:41:00,852 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:42
-2018-07-02 15:46:00,432 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:42
-2018-07-02 16:02:56,962 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:42
-2018-07-02 16:03:05,582 ERROR: Exception on /user/nammflow [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
+  File "/home/seth/myproject/app/routes.py", line 201, in valves
+    valves=valves.items)
+AttributeError: 'list' object has no attribute 'items'
+2018-07-09 12:42:44,430 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:42:47,244 ERROR: Exception on /valves [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
 Traceback (most recent call last):
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -79,10 +41,11 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/home/seth/myproject/app/routes.py", line 72, in user
-    page, app_config['POSTS_PER_PAGE'], False)
-NameError: name 'app_config' is not defined
-2018-07-02 16:03:10,000 ERROR: Exception on /user/nammflow [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
+  File "/home/seth/myproject/app/routes.py", line 205, in valves
+    valves = Valve.query_all().paginate(
+AttributeError: type object 'Valve' has no attribute 'query_all'
+2018-07-09 12:43:08,939 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:43:11,198 ERROR: Exception on /valves [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
 Traceback (most recent call last):
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -98,28 +61,10 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/home/seth/myproject/app/routes.py", line 72, in user
-    page, app_config['POSTS_PER_PAGE'], False)
-NameError: name 'app_config' is not defined
-2018-07-02 16:03:38,227 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:42
-2018-07-05 09:25:04,478 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:42
-2018-07-05 09:25:23,428 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:44
-2018-07-05 10:18:47,136 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:44
-2018-07-05 10:18:57,422 ERROR: Exception on /reset_password_request [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
-Traceback (most recent call last):
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/seth/myproject/app/routes.py", line 147, in reset_password_request
-    form = ResetPasswordRequestForm()
-NameError: name 'ResetPasswordRequestForm' is not defined
-2018-07-05 10:47:58,921 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:44
+  File "/home/seth/myproject/app/routes.py", line 205, in valves
+    valves = Valve.query.all().paginate(
+AttributeError: 'list' object has no attribute 'paginate'
+2018-07-09 12:43:41,222 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:44:49,180 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:48:13,970 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:50:11,007 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46

@@ -1,4 +1,4 @@
-2018-07-02 15:17:58,696 ERROR: Exception on /index [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
+2018-07-09 11:42:19,712 ERROR: Exception on /valves [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
 Traceback (most recent call last):
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,8 +14,8 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/home/seth/myproject/app/routes.py", line 22, in index
-    return render_template("index.html", title='Home Page', form=form, posts=posts)
+  File "/home/seth/myproject/app/routes.py", line 195, in valves
+    valves=valves)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
     context, ctx.app)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
@@ -28,37 +28,41 @@ Traceback (most recent call last):
     reraise(exc_type, exc_value, tb)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
     raise value.with_traceback(tb)
-  File "/home/seth/myproject/app/templates/base.html", line 18, in template
-    <a href="{{ url for('explore') }}">Explore</a>"
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1005, in render
-    return concat(self.root_render_func(self.new_context(vars)))
-  File "/home/seth/myproject/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/home/seth/myproject/app/templates/base.html", line 18, in template
-    <a href="{{ url for('explore') }}">Explore</a>"
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 497, in _parse
-    return Parser(self, source, name, encode_filename(filename)).parse()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 901, in parse
-    result = nodes.Template(self.subparse(), lineno=1)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
-    rv = self.parse_statement()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
-    return getattr(self, 'parse_' + self.stream.current.value)()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 223, in parse_if
-    drop_needle=True)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 165, in parse_statements
-    result = self.subparse(end_tokens)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 876, in subparse
-    self.stream.expect('variable_end')
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/lexer.py", line 384, in expect
-    self.name, self.filename)
-jinja2.exceptions.TemplateSyntaxError: expected token 'end of print statement', got 'for'
-2018-07-02 15:18:29,718 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:42
-2018-07-02 15:18:33,202 ERROR: Exception on /index [GET] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
+  File "/home/seth/myproject/app/templates/valves.html", line 2, in top-level template code
+    {% import 'bootstrap/wtf.html' as wtf %}
+  File "/home/seth/myproject/app/templates/base.html", line 1, in top-level template code
+    {% extends 'bootstrap/base.html' %}
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
+    {%- block html %}
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
+    {% block body -%}
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 23, in block "body"
+    {% block content -%}
+  File "/home/seth/myproject/app/templates/base.html", line 48, in block "content"
+    {% block app_content %}{% endblock %}
+  File "/home/seth/myproject/app/templates/valves.html", line 9, in block "app_content"
+    {{ wtf.quick_form(form) }}
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/runtime.py", line 579, in _invoke
+    rv = self._func(*arguments)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/wtf.html", line 176, in template
+    {%- for field in form %}
+TypeError: 'FormMeta' object is not iterable
+2018-07-09 11:44:29,705 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 11:46:11,164 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 11:48:50,542 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 11:48:56,488 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 11:49:13,160 ERROR: Exception on /valves [POST] [in /home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py:1761
+Traceback (most recent call last):
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/engine/default.py", line 508, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.IntegrityError: UNIQUE constraint failed: valve.id
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -74,47 +78,60 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/home/seth/myproject/app/routes.py", line 22, in index
-    return render_template("index.html", title='Home Page', form=form, posts=posts)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
-    context, ctx.app)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
-    rv = template.render(context)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+  File "/home/seth/myproject/app/routes.py", line 196, in valves
+    db.session.commit()
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/scoping.py", line 153, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 943, in commit
+    self.transaction.commit()
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 467, in commit
+    self._prepare_impl()
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 447, in _prepare_impl
+    self.session.flush()
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 2254, in flush
+    self._flush(objects)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 2380, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/util/langhelpers.py", line 66, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/util/compat.py", line 187, in reraise
+    raise value
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/session.py", line 2344, in _flush
+    flush_context.execute()
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/unitofwork.py", line 391, in execute
+    rec.execute(self)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/unitofwork.py", line 556, in execute
+    uow
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/persistence.py", line 181, in save_obj
+    mapper, table, insert)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/orm/persistence.py", line 830, in _emit_insert_statements
+    execute(statement, multiparams)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 948, in execute
+    return meth(self, multiparams, params)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/sql/elements.py", line 269, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1060, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1200, in _execute_context
+    context)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1413, in _handle_dbapi_exception
+    exc_info
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/util/compat.py", line 203, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb, cause=cause)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/util/compat.py", line 186, in reraise
     raise value.with_traceback(tb)
-  File "/home/seth/myproject/app/templates/base.html", line 18, in template
-    <a href="{{ url for('explore') }}">Explore</a>
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1005, in render
-    return concat(self.root_render_func(self.new_context(vars)))
-  File "/home/seth/myproject/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/home/seth/myproject/app/templates/base.html", line 18, in template
-    <a href="{{ url for('explore') }}">Explore</a>
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/environment.py", line 497, in _parse
-    return Parser(self, source, name, encode_filename(filename)).parse()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 901, in parse
-    result = nodes.Template(self.subparse(), lineno=1)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
-    rv = self.parse_statement()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
-    return getattr(self, 'parse_' + self.stream.current.value)()
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 223, in parse_if
-    drop_needle=True)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 165, in parse_statements
-    result = self.subparse(end_tokens)
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/parser.py", line 876, in subparse
-    self.stream.expect('variable_end')
-  File "/home/seth/myproject/venv/lib/python3.6/site-packages/jinja2/lexer.py", line 384, in expect
-    self.name, self.filename)
-jinja2.exceptions.TemplateSyntaxError: expected token 'end of print statement', got 'for'
-2018-07-02 15:21:58,060 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:42
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/engine/base.py", line 1193, in _execute_context
+    context)
+  File "/home/seth/myproject/venv/lib/python3.6/site-packages/sqlalchemy/engine/default.py", line 508, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: valve.id [SQL: 'INSERT INTO valve (id, description, gpio_pin) VALUES (?, ?, ?)'] [parameters: ('1', 'Zone One', '2')] (Background on this error at: http://sqlalche.me/e/gkpj)
+2018-07-09 11:50:56,257 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 11:51:06,503 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 11:51:15,579 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 11:51:56,795 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 11:54:40,168 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 11:57:25,564 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 11:59:12,968 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:22:10,028 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:22:27,234 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46
+2018-07-09 12:22:32,953 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:46

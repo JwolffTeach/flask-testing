@@ -83,3 +83,12 @@ class Post(db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+class Valve(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    valve = db.Column(db.Integer)
+    description = db.Column(db.String(140))
+    gpio_pin = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Valve {}{}{}{}>'.format(self.id, self.valve, self.description, self.gpio_pin)
