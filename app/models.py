@@ -90,5 +90,22 @@ class Valve(db.Model):
     description = db.Column(db.String(140))
     gpio_pin = db.Column(db.Integer)
 
+    def __init__(self, valve=None, description=None, gpio_pin=None):
+        self.valve = valve
+        self.description = description
+        self.gpio_pin = gpio_pin
+
     def __repr__(self):
-        return '{}'.format(self.valve)
+        return '{}'.format(self.id)
+
+class ZoneSchedule(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    zone = db.Column(db.Integer)
+    runLength = db.Column(db.Integer)
+
+    def __init__(self, zone=None, runLength=None):
+        self.zone = zone
+        self.runLength=runLength
+
+    def __repr__(self):
+        return '{}'.format(self.id)

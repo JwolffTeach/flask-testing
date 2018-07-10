@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, TimeField, HiddenField, IntegerField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
-from app.models import User
+from app.models import User, ZoneSchedule
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -62,11 +62,28 @@ class ValveForm(FlaskForm):
     submit = SubmitField('Add New Valve')
 
 class EditValveForm(FlaskForm):
+    id = TextAreaField('Valve Number', validators=[DataRequired(), Length(min=1, max=2)])
     valve = TextAreaField('Valve Number', validators=[DataRequired(), Length(min=1, max=2)])
     description = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=140)])
     gpio_pin = TextAreaField('GPIO Pin', validators=[DataRequired(), Length(min=1, max=2)])
-    submit = SubmitField('Add New Valve')
+    submit = SubmitField('Submit Changes')
 
-    def __init__(self, original_valve, *args, **kwargs):
+    def __init__(self, original_id, *args, **kwargs):
         super(EditValveForm, self).__init__(*args, **kwargs)
-        self.original_valve = original_valve
+        self.original_id = original_id
+
+class ZoneScheduleForm(FlaskForm):
+    zone = IntegerField('Zone Number', validators=[DataRequired()])
+    runLength = IntegerField('Length(Minutes)', validators=[DataRequired()])
+    submit = SubmitField('Submit Changes')
+
+
+class EditZoneScheduleForm(FlaskForm):
+    id = HiddenField("ID")
+    zone = IntegerField('Zone Number', validators=[DataRequired()])
+    runLength = IntegerField('Length(Minutes)', validators=[DataRequired()])
+    submit = SubmitField('Submit Changes')
+
+    def __init__(self, original_id, *args, **kwargs):
+        super(EditZoneScheduleForm, self).__init__(*args, **kwargs)
+        self.original_id = original_id

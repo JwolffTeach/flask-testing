@@ -4,8 +4,9 @@ from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, \
-    ResetPasswordRequestForm, ResetPasswordForm, ValveForm, EditValveForm
-from app.models import User, Post, Valve
+    ResetPasswordRequestForm, ResetPasswordForm, ValveForm, EditValveForm, \
+    ZoneScheduleForm, EditZoneScheduleForm
+from app.models import User, Post, Valve, ZoneSchedule
 from app.email import send_password_reset_email
 
 
@@ -198,7 +199,7 @@ def valves():
         return redirect(url_for('valves'))
     page = request.args.get('page', 1, type=int)
     valves = Valve.query.order_by(Valve.id).paginate(
-        page, app.config['POSTS_PER_PAGE'], False)
+        page, app.config['VALVES_PER_PAGE'], False)
     next_url = url_for('valves', page=valves.next_num) \
         if valves.has_next else None
     prev_url = url_for('valves', page=valves.prev_num) \
@@ -211,12 +212,66 @@ def valves():
 @login_required
 def edit_valve(valve):
     form = EditValveForm(valve)
+    oldValve = Valve.query.filter_by(id=valve).first()
     if form.validate_on_submit():
-        valve.valve = form.valve.data
-        valve.description = form.description.data
-        valve.gpio_pin = form.gpio_pin.data
+        oldValve.id = form.id.data
+        oldValve.valve = form.valve.data
+        oldValve.description = form.description.data
+        oldValve.gpio_pin = form.gpio_pin.data
         db.session.commit()
         flash('Your changes have been saved.')
-        return redirect(url_for('edit_valve/<valve>'))
+        return redirect(url_for('valves'))
+    elif request.method == 'GET':
+        form.id.data = oldValve.id
+        form.valve.data = oldValve.valve
+        form.description.data = oldValve.description
+        form.gpio_pin.data = oldValve.gpio_pin
     return render_template('edit_valve.html', title='Edit Valve',
+                           form=form)
+
+@app.route('/schedule', methods=['GET', 'POST'])
+@login_required
+def schedule():
+    page = request.args.get('page', 1, type=int)
+    zoneSchedules = ZoneSchedule.query.order_by(ZoneSchedule.id).paginate(
+        page, app.config['VALVES_PER_PAGE'], False)
+    next_url = url_for('schedule', page=zoneSchedules.next_num) \
+        if zoneSchedules.has_next else None
+    prev_url = url_for('schedule', page=zoneSchedules.prev_num) \
+        if zoneSchedules.has_prev else None
+    return render_template('schedule.html', title='Sprinkler Zone Schedule',
+                           zoneSchedules=zoneSchedules.items, next_url=next_url,
+                           prev_url=prev_url)
+
+@app.route('/add_schedule', methods=['GET', 'POST'])
+@login_required
+def add_schedule():
+    form = ZoneScheduleForm()
+    if form.validate_on_submit():
+        zoneSchedule = ZoneSchedule(
+            zone=form.zone.data, 
+            runLength=form.runLength.data)
+        db.session.add(zoneSchedule)
+        db.session.commit()
+        flash('Your valve schedule has been added!')
+        return redirect(url_for('schedule'))
+    return render_template('add_schedule.html', title='Schedule a Zone', form=form)
+
+@app.route('/edit_schedule/<schedule>', methods=['GET', 'POST'])
+@login_required
+def edit_schedule(schedule):
+    form = EditZoneScheduleForm(schedule)
+    oldSchedule = ZoneSchedule.query.filter_by(id=schedule).first()
+    if form.validate_on_submit():
+        oldSchedule.id = form.id.data
+        oldSchedule.zone = form.zone.data
+        oldSchedule.runLength = form.runLength.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('schedule'))
+    elif request.method == 'GET':
+        form.id.data = oldSchedule.id
+        form.zone.data = oldSchedule.zone
+        form.runLength.data = oldSchedule.runLength
+    return render_template('edit_schedule.html', title='Edit Schedule',
                            form=form)
