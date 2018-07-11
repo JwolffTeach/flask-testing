@@ -3,5 +3,5 @@
     <td>{{ valve.valve }}</td>
     <td>{{ valve.description }}</td>
     <td>{{ valve.gpio_pin }}</td>
-    <td><a href="{{ url_for('edit_valve', valve=valve) }}">Edit</a></td>
+    <td><a href="{{ url_for('main.edit_valve', valve=valve) }}">Edit</a></td>
 </tr>
