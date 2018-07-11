@@ -98,3 +98,8 @@ jinja2.exceptions.TemplateSyntaxError: expected token 'end of print statement', 
 2018-07-11 10:47:19,165 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:79]
 2018-07-11 10:47:22,280 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:79]
 2018-07-11 10:47:53,730 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:79]
+2018-07-11 11:58:25,869 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:90]
+2018-07-11 11:59:07,694 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:90]
+2018-07-11 11:59:07,694 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:90]
+2018-07-11 12:16:37,940 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:90]
+2018-07-11 12:26:25,091 INFO: Microblog startup [in /home/seth/myproject/app/__init__.py:90]
