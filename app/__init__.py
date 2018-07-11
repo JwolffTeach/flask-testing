@@ -54,7 +54,10 @@ def create_app(config_class=Config):
     app.register_blueprint(main_bp)
 
     from app.valves import bp as valves_bp
-    app.register_blueprint(valves_bp, url_prefix='/valves')
+    app.register_blueprint(valves_bp)
+
+    from app.schedule import bp as schedule_bp
+    app.register_blueprint(schedule_bp)
 
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
