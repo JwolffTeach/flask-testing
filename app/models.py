@@ -7,6 +7,7 @@ from time import time
 import jwt
 from app import db, login
 
+
 followers = db.Table('Followers',
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
