@@ -1,56 +1,20 @@
-import RPi.GPIO as GPIO
 import time
 from app import create_app, db
 from app.models import User, Post
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from flask_apscheduler import APScheduler
+import taskScheduler
 
-def show_zones():
-    with app.app_context():
-        from app.models import ZoneSchedule
-        from app.models import Valve
-        zonesNums = ZoneSchedule.query.all()
-        valves = Valve.query.all()
-        
-        GPIO.setmode(GPIO.BCM)
-        SleepTimeL = 0.5
-        gpioPins = [2,3,4,17,27,22,10,9]
-        for i in gpioPins:
-            GPIO.setup(i, GPIO.OUT)
-            GPIO.output(i, GPIO.HIGH)
-        
-        try:
-            for valve in valves:
-                GPIO.output(valve.gpio_pin, GPIO.LOW)
-                print(valve.valve, " ", valve.description, "is running.")
-                time.sleep(SleepTimeL)
-                GPIO.output(valve.gpio_pin, GPIO.HIGH)
-                time.sleep(SleepTimeL)
-            GPIO.cleanup()
-            print ("Good bye!")
-
-        except:
-            print("  Quit")
-            # Reset GPIO settings
-            GPIO.cleanup()
-
-
-        #runLengths = []
-        #for zone in zones:
-        #    runLengths.append(zone.RunLengths)
-        #for valve in Valves:
-        #    gpioPins.append(valve.gpio_pin)
-
-
-class Config(object):
+class ScheduleConfig(object):
     JOBS = [
         {
             'id': 'job1',
-            'func': show_zones,
+            'func': taskScheduler.dummy,
             'trigger': 'cron',
             'replace_existing': True,
-            'hour': '23',
-            'minute': '03'
+            'hour': '00',
+            'minute': '33',
+            'second': '50'
         }
     ]
 
@@ -61,16 +25,14 @@ class Config(object):
     SCHEDULER_API_ENABLED = True
 
 app = create_app()
-app.config.from_object(Config())
+app.config.from_object(ScheduleConfig())
 
+with app.app_context():
+    taskScheduler.start_sched()
+
+#with app.app_context():
 # Scheduler Stuff
-sched = APScheduler()
-sched.init_app(app)
-sched.start()
-scheduler = sched.scheduler
-
-# You can reschedule it by doing this:
-scheduler.reschedule_job('job1', trigger='cron', hour='23', minute='17')
+#current_app.sched.start()
 
 @app.shell_context_processor
 def make_shell_context():
