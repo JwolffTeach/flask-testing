@@ -6,17 +6,6 @@ from flask_apscheduler import APScheduler
 import taskScheduler
 
 class ScheduleConfig(object):
-    JOBS = [
-        {
-            'id': 'job1',
-            'func': taskScheduler.dummy,
-            'trigger': 'cron',
-            'replace_existing': True,
-            'hour': '00',
-            'minute': '33',
-            'second': '50'
-        }
-    ]
 
     SCHEDULER_JOBSTORES = {
         'default': SQLAlchemyJobStore(url='sqlite:///flask_context.db')

@@ -2,10 +2,12 @@ from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request, g, \
     current_app
 from flask_login import current_user, login_required
-from app import db
-from app.main.forms import EditProfileForm, PostForm
+from app import db, sched
+from app.main.forms import EditProfileForm, PostForm, ChangeSprinklerStartForm
 from app.models import User, Post
 from app.main import bp
+from taskScheduler import stop_all_sprinklers, run_sprinklers
+import taskScheduler
 
 
 @bp.before_app_request
@@ -14,7 +16,46 @@ def before_request():
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
 
+@bp.route('/', methods=['GET', 'POST'])
+@bp.route('/index', methods=['GET', 'POST'])
+@login_required
+def index():
+    form = ChangeSprinklerStartForm()
+    if form.validate_on_submit():
+        stop_all_sprinklers(current_app)
+        hour_24 = int(form.hour.data) + 6
+        if hour_24 > 24:
+            hour_24 -= 24
+        # Look for a sprinkler job, get rid of it if it exists
+        jobs=0
+        for job in sched.scheduler.get_jobs():
+            job = sched.scheduler.get_job(job.id)
+            sched.scheduler.remove_job(job.id)
+            jobs+=1
+        sched.scheduler.add_job(run_sprinklers, 'cron', id='sprinklerjob'+str(jobs), hour=hour_24, minute=form.minute.data, replace_existing= True, max_instances=2, args=[current_app._get_current_object()])
+        #sched.scheduler.reschedule_job('sprinklerjob', trigger='cron', hour=hour_24, minute=form.minute.data)
+        #sched.scheduler.modify_starttime('sprinklerjob', form.hour.data, form.minute.data)
+        flash('Start Time has been modified.')
+        return redirect(url_for('main.index'))
+    elif request.method == 'GET':
+        joblist = ''
+        for job in sched.scheduler.get_jobs():
+            job =  sched.scheduler.get_job(job.id)
+            for f in job.trigger.fields:
+                if f.name == 'hour':
+                    hour = f
+                    hour_24 = int(str(hour)) - 6
+                    if hour_24 < 0:
+                        hour_24 += 24
+                    form.hour.data = hour_24
+                if f.name == 'minute':
+                    minute = f
+                    form.minute.data = minute
+            joblist += '%(jobname)s : %(jobhour)s:%(jobminute)s' % {"jobname": job.name, "jobhour": hour, "jobminute": minute}
+    return render_template('index.html', title='Home', form=form)
+        
 
+""" Old index
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
@@ -36,7 +77,7 @@ def index():
     return render_template('index.html', title='Home', form=form,
                            posts=posts.items, next_url=next_url,
                            prev_url=prev_url)
-
+"""
 
 @bp.route('/explore')
 @login_required
