@@ -103,10 +103,24 @@ class ZoneSchedule(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     zone = db.Column(db.Integer)
     runLength = db.Column(db.Integer)
+    m = db.Column(db.Boolean)
+    t = db.Column(db.Boolean)
+    w = db.Column(db.Boolean)
+    th = db.Column(db.Boolean)
+    f = db.Column(db.Boolean)
+    s = db.Column(db.Boolean)
+    su = db.Column(db.Boolean)
 
-    def __init__(self, zone=None, runLength=None):
+    def __init__(self, zone=None, runLength=None, m=False, t=False, w=False, th=False, f=False, s=False, su=False):
         self.zone = zone
         self.runLength=runLength
+        self.m = m
+        self.t = t
+        self.w = w
+        self.th = th
+        self.f = f
+        self.s = s
+        self.su = su
 
     def __repr__(self):
         return '{}'.format(self.id)
