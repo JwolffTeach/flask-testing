@@ -11,7 +11,7 @@ from app.schedule import bp
 @login_required
 def schedule():
     page = request.args.get('page', 1, type=int)
-    zoneSchedules = ZoneSchedule.query.order_by(ZoneSchedule.id).paginate(
+    zoneSchedules = ZoneSchedule.query.join(Valve, ZoneSchedule.zone == Valve.valve).add_columns(Valve.valve, Valve.description, Valve.gpio_pin, ZoneSchedule.runLength).order_by(ZoneSchedule.id).paginate(
         page, current_app.config['VALVES_PER_PAGE'], False)
     next_url = url_for('schedule.schedule', page=zoneSchedules.next_num) \
         if zoneSchedules.has_next else None

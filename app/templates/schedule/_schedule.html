@@ -1,5 +1,83 @@
 <tr>
-    <th scope="row">{{ schedule.zone }}</th>
+    <th scope="row">{{ schedule.valve }}</th>
     <td>{{ schedule.runLength }}</td>
+    <td>{{ schedule.description }}</td>
+    <td>
+        <div class="checkbox">
+            <label class="checkbox-inline">
+                {% if schedule.m %}
+                <input type="checkbox" checked disabled>
+                {% else %}
+                <input type="checkbox" disabled>
+                {% endif %}
+            </label>
+        </div>
+    </td>
+    <td>
+        <div class="checkbox">
+            <label class="checkbox-inline">
+                {% if schedule.t %}
+                <input type="checkbox" checked disabled>
+                {% else %}
+                <input type="checkbox" disabled>
+                {% endif %}
+            </label>
+        </div>
+    </td>
+    <td>
+        <div class="checkbox">
+            <label class="checkbox-inline">
+                {% if schedule.w %}
+                <input type="checkbox" checked disabled>
+                {% else %}
+                <input type="checkbox" disabled>
+                {% endif %}
+            </label>
+        </div>
+    </td>
+    <td>
+        <div class="checkbox">
+            <label class="checkbox-inline">
+                {% if schedule.th %}
+                <input type="checkbox" checked disabled>
+                {% else %}
+                <input type="checkbox" disabled>
+                {% endif %}
+            </label>
+        </div>
+    </td>
+    <td>
+        <div class="checkbox">
+            <label class="checkbox-inline">
+                {% if schedule.f %}
+                <input type="checkbox" checked disabled>
+                {% else %}
+                <input type="checkbox" disabled>
+                {% endif %}
+            </label>
+        </div>
+    </td>
+    <td>
+        <div class="checkbox">
+            <label class="checkbox-inline">
+                {% if schedule.s %}
+                <input type="checkbox" checked disabled>
+                {% else %}
+                <input type="checkbox" disabled>
+                {% endif %}
+            </label>
+        </div>
+    </td>
+    <td>
+        <div class="checkbox">
+            <label class="checkbox-inline">
+                {% if schedule.su %}
+                <input type="checkbox" checked disabled>
+                {% else %}
+                <input type="checkbox" disabled>
+                {% endif %}
+            </label>
+        </div>
+    </td>
     <td><a href="{{ url_for('schedule.edit_schedule', schedule=schedule) }}">Edit</a></td>
 </tr>
