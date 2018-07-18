@@ -8,8 +8,8 @@ def show_zones():
     with app.app_context():
         from app.models import ZoneSchedule
         zones = ZoneSchedule.query.all()
-        for zone in zones:
-            print(zone.runLength)
+        #for zone in zones:
+        #    print(zone.runLength)
 
 class Config(object):
     JOBS = [
@@ -30,6 +30,8 @@ class Config(object):
 
 app = create_app()
 app.config.from_object(Config())
+db.drop_all()
+db.create_all()
 
 # Scheduler Stuff
 scheduler = APScheduler()
